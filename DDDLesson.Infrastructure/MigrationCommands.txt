@@ -1,0 +1,4 @@
+﻿dotnet ef migrations add InitialCreate --project DDDLesson.Infrastructure --startup-project DDDLesson.Presentation
+dotnet ef database update --project DDDLesson.Infrastructure --startup-project DDDLesson.Presentation
+dotnet ef migrations remove --project DDDLesson.Infrastructure --startup-project DDDLesson.Presentation
+dotnet ef database update --verbose --project DDDLesson.Infrastructure --startup-project DDDLesson.Presentation
