@@ -1,5 +1,4 @@
 ﻿using DDDLesson.ApplicationWpfLib.Common;
-using DDDLesson.ApplicationWpfLib.Features.Workers.GetWorkersList;
 using DDDLesson.Domain.Workers.CreateWorker;
 using MediatR;
 using System.Windows.Input;
@@ -9,7 +8,7 @@ namespace DDDLesson.ApplicationWpfLib.Features.Workers.CreateWorker;
 public class CreateWorkerViewModel : ViewModelBase
 {
     private readonly IMediator mediator;
-    private string name;
+    private string name = string.Empty;
 
     public CreateWorkerViewModel(IMediator mediator)
     {
