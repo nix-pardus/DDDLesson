@@ -13,11 +13,17 @@ public abstract class DbRepository<TDbContext, TEntityKey, TEntity> : IDbReposit
 {
     protected TDbContext DbContext { get; }
     protected DbSet<TEntity> DbSet { get; }
+    public event EventHandler RepositoryChanged;
 
     protected DbRepository(TDbContext dbContext)
     {
         DbContext = dbContext;
         DbSet = DbContext.Set<TEntity>();
+    }
+
+    protected virtual void OnRepositoryChanged()
+    {
+        RepositoryChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public async ValueTask<EntityEntry<TEntity>> AddAsync(TEntity entity)
@@ -26,6 +32,7 @@ public abstract class DbRepository<TDbContext, TEntityKey, TEntity> : IDbReposit
         var entry = await DbContext.AddAsync(entity);
         await DbContext.SaveChangesAsync();
         transaction.Complete();
+        OnRepositoryChanged();
         return entry;
     }
 
@@ -63,6 +70,7 @@ public abstract class DbRepository<TDbContext, TEntityKey, TEntity> : IDbReposit
             DbSet.Remove(entity);
             await DbContext.SaveChangesAsync();
             transaction.Complete();
+            OnRepositoryChanged();
             return true;
         }
         transaction.Complete();
@@ -146,7 +154,7 @@ public abstract class DbRepository<TDbContext, TEntityKey, TEntity> : IDbReposit
             updater.Invoke(entity);
             await DbContext.SaveChangesAsync();
             transaction.Complete();
-
+            OnRepositoryChanged();
             return true;
         }
         transaction.Complete();

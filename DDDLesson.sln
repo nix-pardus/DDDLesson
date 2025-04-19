@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.Domain", "DDDLess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.Infrastructure", "DDDLesson.Infrastructure\DDDLesson.Infrastructure.csproj", "{DE523D62-789F-4DB5-B1F0-5AE66C2D4F29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.Presentation", "DDDLesson.Presentation\DDDLesson.Presentation.csproj", "{095D650F-DABF-4CEF-B1B1-BDC9E41AB630}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.Common", "DDDLesson.Common\DDDLesson.Common.csproj", "{7EEF91FA-94DC-4106-A2D3-C5160AEC256E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.ApplicationWpfLib", "DDDLesson.ApplicationWpfLib\DDDLesson.ApplicationWpfLib.csproj", "{64F53242-E7DD-467C-BE28-5E383A6FE7D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.WinUI3", "DDDLesson.WinUI3\DDDLesson.WinUI3.csproj", "{493FE6A6-F744-4986-86C3-E8286A8ADF4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.ApplicationWinUI3", "DDDLesson.ApplicationWinUI3\DDDLesson.ApplicationWinUI3.csproj", "{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,18 +27,20 @@ Global
 		{DE523D62-789F-4DB5-B1F0-5AE66C2D4F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE523D62-789F-4DB5-B1F0-5AE66C2D4F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE523D62-789F-4DB5-B1F0-5AE66C2D4F29}.Release|Any CPU.Build.0 = Release|Any CPU
-		{095D650F-DABF-4CEF-B1B1-BDC9E41AB630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{095D650F-DABF-4CEF-B1B1-BDC9E41AB630}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{095D650F-DABF-4CEF-B1B1-BDC9E41AB630}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{095D650F-DABF-4CEF-B1B1-BDC9E41AB630}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7EEF91FA-94DC-4106-A2D3-C5160AEC256E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7EEF91FA-94DC-4106-A2D3-C5160AEC256E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EEF91FA-94DC-4106-A2D3-C5160AEC256E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EEF91FA-94DC-4106-A2D3-C5160AEC256E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64F53242-E7DD-467C-BE28-5E383A6FE7D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64F53242-E7DD-467C-BE28-5E383A6FE7D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64F53242-E7DD-467C-BE28-5E383A6FE7D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64F53242-E7DD-467C-BE28-5E383A6FE7D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Debug|Any CPU.Build.0 = Debug|x64
+		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Debug|Any CPU.Deploy.0 = Debug|x64
+		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Release|Any CPU.ActiveCfg = Release|x64
+		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Release|Any CPU.Build.0 = Release|x64
+		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Release|Any CPU.Deploy.0 = Release|x64
+		{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

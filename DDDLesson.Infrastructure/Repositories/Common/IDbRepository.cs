@@ -8,6 +8,7 @@ public interface IDbRepository<TEntityKey, TEntity>
     where TEntity : class, IEntry<TEntityKey>
     where TEntityKey : IEquatable<TEntityKey>, new()
 {
+    public event EventHandler RepositoryChanged;
     ValueTask<EntityEntry<TEntity>> AddAsync(TEntity entity);
     ValueTask<bool> UpdateAsync(TEntityKey key, Action<TEntity> updater);
     ValueTask<IReadOnlyCollection<TEntity>> GetAllAsync(CancellationToken cancellationToken);

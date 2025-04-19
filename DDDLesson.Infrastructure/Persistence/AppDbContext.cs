@@ -7,6 +7,10 @@ namespace DDDLesson.Infrastructure.Persistence;
 
 public class AppDbContext : DbContext
 {
+    public AppDbContext(DbContextOptions options) : base(options)
+    {
+    }
+
     public DbSet<WorkerEntity> Workers { get; init; }
     public DbSet<PackagingTypeEntity> PackagingTypes { get; init; }
     public DbSet<WorkDayEntity> WorkDays { get; init; }
@@ -14,7 +18,7 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string path = GetSolutionDirectory() + "\\DDDLesson.Presentation\\quadrature.db";
+        string path = GetSolutionDirectory() + "\\DDDLesson.Infrastructure\\quadrature.db";
 
         optionsBuilder.UseSqlite($"Data Source={path}")
             .ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.AmbientTransactionWarning));
