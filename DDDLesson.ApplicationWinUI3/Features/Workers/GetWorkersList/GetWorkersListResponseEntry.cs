@@ -1,9 +1,9 @@
-﻿using DDDLesson.Common;
+﻿//using DDDLesson.Common;
 
-namespace DDDLesson.ApplicationWinUI3.Features.Workers.GetWorkersList;
+//namespace DDDLesson.ApplicationWinUI3.Features.Workers.GetWorkersList;
 
-public class GetWorkersListResponseEntry
-{
-    public WorkerId Id { get; init; }
-    public string Name { get; init; }
-}
+//public class GetWorkersListResponseEntry
+//{
+//    public WorkerId Id { get; init; }
+//    public string Name { get; init; }
+//}

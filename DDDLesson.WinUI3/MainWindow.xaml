@@ -6,29 +6,34 @@
     xmlns:local="using:DDDLesson.WinUI3"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:getWorkers="using:DDDLesson.ApplicationWinUI3.Features.Workers.GetWorkersList"
+    xmlns:getWorkers="using:DDDLesson.WinUI3.ViewModels.Workers.GetWorkersList"
     mc:Ignorable="d"
     Title="DDDLesson.WinUI3">
-    <StackPanel x:Name="MainStackPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <StackPanel Orientation="Horizontal">
-            <TextBox Text="{x:Bind MainViewModel.CreateWorker.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     PlaceholderText="Введите имя (минимум 2 символа)"/>
-            <Button Content="Add" Command="{x:Bind MainViewModel.CreateWorker.CreateWorkerCommand}"/>
-            <Button Content="Delete" Command="{x:Bind MainViewModel.DeleteWorker.DeleteWorkerCommand}"/>
-        </StackPanel>
-        <StackPanel>
-            <ListView 
+    <Grid>
+        <Frame x:Name="MainFrame" IsNavigationStackEnabled="True"/>
+        <StackPanel x:Name="MainStackPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="{x:Bind MainViewModel.CreateWorker.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     PlaceholderText="Введите имя (минимум 2 символа)"
+                     KeyDown="TextBox_KeyDown"/>
+                <Button Content="Add" Command="{x:Bind MainViewModel.CreateWorker.CreateWorkerCommand}"/>
+                <Button Content="Delete" Command="{x:Bind MainViewModel.DeleteWorker.DeleteWorkerCommand}"/>
+            </StackPanel>
+            <StackPanel>
+                <ListView 
                 x:Name="listViewWorkers" 
                 ItemsSource="{x:Bind MainViewModel.GetWorkerList.WorkersList, Mode=TwoWay}"
                 SelectedItem="{x:Bind MainViewModel.DeleteWorker.SelectedWorker, Mode=TwoWay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="getWorkers:GetWorkersListResponseEntry">
-                        <Grid>
-                            <TextBlock Text="{x:Bind Path=Name}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="getWorkers:GetWorkersListResponseEntry">
+                            <Grid>
+                                <TextBlock Text="{x:Bind Path=Name}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+            <Button Content="Тары и цены" Command="{x:Bind MainViewModel.NavigateToPackagingTypesVMCommand}"/>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>

@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.Common", "DDDLess
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.WinUI3", "DDDLesson.WinUI3\DDDLesson.WinUI3.csproj", "{493FE6A6-F744-4986-86C3-E8286A8ADF4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDDLesson.ApplicationWinUI3", "DDDLesson.ApplicationWinUI3\DDDLesson.ApplicationWinUI3.csproj", "{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsCollection", "ControlsCollection\ControlsCollection.csproj", "{9ED6CCE4-A845-4CE3-82FD-C5AF6C3A8A9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +37,10 @@ Global
 		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Release|Any CPU.ActiveCfg = Release|x64
 		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Release|Any CPU.Build.0 = Release|x64
 		{493FE6A6-F744-4986-86C3-E8286A8ADF4B}.Release|Any CPU.Deploy.0 = Release|x64
-		{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B50DE561-CA5C-4F6F-BE04-7E3F82955FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ED6CCE4-A845-4CE3-82FD-C5AF6C3A8A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED6CCE4-A845-4CE3-82FD-C5AF6C3A8A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED6CCE4-A845-4CE3-82FD-C5AF6C3A8A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED6CCE4-A845-4CE3-82FD-C5AF6C3A8A9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
