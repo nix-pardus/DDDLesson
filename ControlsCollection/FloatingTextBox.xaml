@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserControl
+    x:Class="ControlsCollection.FloatingTextBox"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ControlsCollection"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="PlaceholderStates">
+                <VisualState x:Name="Normal">
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="PlaceholderTransform"
+                                         Storyboard.TargetProperty="Y"
+                                         To="0"
+                                         Duration="0:0:0.2"
+                                         EnableDependentAnimation="True"/>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderText"
+                                                       Storyboard.TargetProperty="FontSize">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="14"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Floating">
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="PlaceholderTransform"
+                                         Storyboard.TargetProperty="Y"
+                                         To="-30"
+                                         Duration="0:0:0.2"/>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PlaceholderText"
+                                                       Storyboard.TargetProperty="FontSize">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="12"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Border x:Name="InputBorder"
+                CornerRadius="4"
+                BorderThickness="1"
+                BorderBrush="{ThemeResource TextBoxBorderThemeBrush}"
+                Background="{ThemeResource TextControlBackground}"
+                Padding="0,0,0,0">
+
+            <TextBox x:Name="InputTextBox"
+                     BorderThickness="0"
+                     Padding="12,8,12,8"
+                     Background="Transparent"
+                     TextChanged="InputTextBox_TextChanged"
+                     GotFocus="InputTextBox_GotFocus"
+                     LostFocus="InputTextBox_LostFocus"
+                     BeforeTextChanging="InputTextBox_BeforeTextChanging"/>
+        </Border>
+
+        <TextBlock x:Name="PlaceholderText"
+                   Margin="16,9,0,0"
+                   Foreground="{ThemeResource TextControlPlaceholderForeground}"
+                   FontSize="14"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   PointerPressed="PlaceholderText_PointerPressed">
+            <TextBlock.RenderTransform>
+                <TranslateTransform x:Name="PlaceholderTransform" Y="0"/>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+    </Grid>
+</UserControl>

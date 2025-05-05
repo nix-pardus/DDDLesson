@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -20,6 +22,15 @@ namespace DDDLesson.WinUI3
         /// </summary>
         public App()
         {
+            this.UnhandledException += (sender, e) =>
+            {
+                Debug.WriteLine($"UNHANDLED EXCEPTION: {e.Exception}");
+            };
+            TaskScheduler.UnobservedTaskException += (sender, e) =>
+            {
+                Debug.WriteLine($"TASK EXCEPTOPN: {e.Exception}");
+            };
+
             this.InitializeComponent();
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddAplicationServices();

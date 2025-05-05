@@ -2,14 +2,14 @@
 using DDDLesson.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DDDLesson.Domain;
+namespace DDDLesson.Infrastructure;
 
 public static class ServiceExtensions
 {
-    public static IServiceCollection AddDomainServices(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
-        services.AddDbRepositories();
         services.AddDbContext<AppDbContext>();
+        services.AddDbRepositories();
         return services;
     }
 }

@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿//using System.Collections.ObjectModel;
 
-namespace DDDLesson.ApplicationWinUI3.Features.Workers.GetWorkersList;
+//namespace DDDLesson.ApplicationWinUI3.Features.Workers.GetWorkersList;
 
-public class GetWorkersListResponse
-{
-    public required ObservableCollection<GetWorkersListResponseEntry> Entries { get; init; }
-}
+//public class GetWorkersListResponse
+//{
+//    public required ObservableCollection<GetWorkersListResponseEntry> Entries { get; init; }
+//}

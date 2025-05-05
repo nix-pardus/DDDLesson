@@ -8,12 +8,10 @@ namespace DDDLesson.Domain.Workers.CreateWorker;
 public class CreateWorkerCommandHandler : IRequestHandler<CreateWorkerCommand, WorkerId>
 {
     private readonly IWorkerEntityRepository repository;
-    private readonly IMediator mediator;
 
     public CreateWorkerCommandHandler(IWorkerEntityRepository repository, IMediator mediator)
     {
         this.repository = repository;
-        this.mediator = mediator;
     }
 
     public async Task<WorkerId> Handle(CreateWorkerCommand request, CancellationToken cancellationToken)
