@@ -15,15 +15,13 @@
         <converters:DecimalToDoubleConverter x:Key="DecimalToDoubleConverter"/>
         <converters:DecimalToStringConverter x:Key="DecimalToStringConverter"/>
     </Page.Resources>
-
     <Grid>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-
+        
         <CommandBar Grid.Row="0"
                     Background="{ThemeResource AccentAcrylicBackgroundFillColorBaseBrush}"
                     DefaultLabelPosition="Right">
@@ -33,127 +31,140 @@
                           Command="{Binding GoBackCommand}" 
                           IsEnabled="{Binding CanGoBack}"/>
         </CommandBar>
+        <ScrollView Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" 
-                   Text="Тары и цены" 
-                   Margin="30"
-                   FontSize="24"/>
 
-        <StackPanel Grid.Row="2"
-                    Orientation="Vertical">
+                <TextBlock Grid.Row="1" 
+                           Text="Тары и цены" 
+                           Margin="30"
+                           FontSize="24"/>
 
-            <StackPanel Orientation="Horizontal"
-                        Spacing="8"
-                        VerticalAlignment="Center"
-                        Margin="20">
-                <Button Content="Добавить"
-                        Command="{Binding PackagingTypesVM.SplitViewPaneOpenCommand}"/>
-                <Button Content="Изменить"
-                        Command="{Binding PackagingTypesVM.EditPackagingTypeCommand}"/>
-                <Button Content="Удалить"
-                        IsEnabled="{Binding PackagingTypesVM.CanDeleteOrEditPackagingType}">
-                    <Button.Flyout>
-                        <Flyout>
-                            <StackPanel Width="400" 
-                                        Padding="20"
-                                        Spacing="8">
-                                <TextBlock Text="Удаление приведет в негодность прошлые данные. Если нужно изменить цены, лучше нажать кнопку 'Изменить'."
-                                           TextWrapping="Wrap"/>
-                                <Button Content="Все равно удалить" 
-                                        Command="{Binding PackagingTypesVM.DeletePackagingTypeCommand}"
-                                        Background="{ThemeResource CloseButtonBackgroundPointerOver}"/>
-                            </StackPanel>
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
-            </StackPanel>
+                <StackPanel Grid.Row="2"
+                            Orientation="Vertical">
 
-            <Border BorderThickness="1"
-                    CornerRadius="4"
-                    BorderBrush="SlateGray"
-                    Margin="20,0,20,0">
-                <SplitView x:Name="SplitViewForm" 
-                           DisplayMode="CompactInline"
-                           CompactPaneLength="0"
-                           OpenPaneLength="400"
-                           PanePlacement="Left"
-                           IsPaneOpen="{Binding PackagingTypesVM.IsPaneOpen}">
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="8"
+                                VerticalAlignment="Center"
+                                Margin="20">
+                        <Button Content="Добавить"
+                                Command="{Binding PackagingTypesVM.SplitViewPaneOpenCommand}"/>
+                        <Button Content="Изменить"
+                                Command="{Binding PackagingTypesVM.EditPackagingTypeCommand}"/>
+                        <Button Content="Удалить"
+                                IsEnabled="{Binding PackagingTypesVM.CanDeleteOrEditPackagingType}">
+                            <Button.Flyout>
+                                <Flyout x:Name="deleteFlyout">
+                                    <StackPanel Width="400" 
+                                                Padding="20"
+                                                Spacing="8">
+                                        <TextBlock Text="Удаление приведет в негодность прошлые данные. Если нужно изменить цены, лучше нажать кнопку 'Изменить'."
+                                                   TextWrapping="Wrap"/>
+                                        <Button Content="Все равно удалить" 
+                                                Command="{Binding PackagingTypesVM.DeletePackagingTypeCommand}"
+                                                Background="{ThemeResource CloseButtonBackgroundPointerOver}"
+                                                Click="deleteButton_Click">
+                                            
+                                        </Button>
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </StackPanel>
 
-                    <!-- Основной контент страницы -->
-                    <SplitView.Content>
-                        <Grid>
+                    <Border BorderThickness="1"
+                            CornerRadius="4"
+                            BorderBrush="SlateGray"
+                            Margin="20,0,20,0">
+                        <SplitView x:Name="SplitViewForm" 
+                                   DisplayMode="CompactInline"
+                                   CompactPaneLength="0"
+                                   OpenPaneLength="400"
+                                   PanePlacement="Left"
+                                   IsPaneOpen="{Binding PackagingTypesVM.IsPaneOpen}">
 
-                            <!-- Здесь ваш список сущностей -->
-                            <ListView ItemsSource="{Binding PackagingTypesVM.PackagingTypesList, Mode=TwoWay}"
-                                      SelectedItem="{Binding PackagingTypesVM.SelectedPackagingType, Mode=TwoWay}"
-                                      Grid.Column="0"
-                                      Margin="12">
-                                <ListView.Header>
-                                    <Grid Background="DarkSlateGray"
-                                          Padding="10">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
+                            <!-- Основной контент страницы -->
+                            <SplitView.Content>
+                                <Grid>
 
-                                        <TextBlock Grid.Column="0" Text="Название" FontWeight="Bold" Foreground="LightGray" FontSize="16"/>
-                                        <TextBlock Grid.Column="1" Text="Цена в будний день" FontWeight="Bold" Foreground="LightGray" FontSize="16"/>
-                                        <TextBlock Grid.Column="2" Text="Цена в выходной день" FontWeight="Bold" Foreground="LightGray" FontSize="16"/>
-                                    </Grid>
-                                </ListView.Header>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate x:DataType="getPT:GetPackagingTypesListResponseEntry">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{x:Bind Path=Name}"/>
-                                            <TextBlock Grid.Column="1" Text="{x:Bind Path=PricePerSquareMeter}"/>
-                                            <TextBlock Grid.Column="2" Text="{x:Bind Path=PricePerSquareMeterOnWeekend}"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                            
-                            
-                            
-                        </Grid>
-                    </SplitView.Content>
+                                    <!-- Здесь ваш список сущностей -->
+                                    <ListView ItemsSource="{Binding PackagingTypesVM.PackagingTypesList, Mode=TwoWay}"
+                                              SelectedItem="{Binding PackagingTypesVM.SelectedPackagingType, Mode=TwoWay}"
+                                              Grid.Column="0"
+                                              Margin="12">
+                                        <ListView.Header>
+                                            <Grid Background="DarkSlateGray"
+                                                  Padding="10">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
 
-                    <!-- Выдвижная форма -->
-                    <SplitView.Pane>
-                        <StackPanel Padding="16" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                            <controls:FloatingTextBox Placeholder="Название тары" 
-                                                      Text="{Binding PackagingTypesVM.PackagingTypeName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                      Margin="0,0,0,30"/>
+                                                <TextBlock Grid.Column="0" Text="Название" FontWeight="Bold" Foreground="LightGray" FontSize="16"/>
+                                                <TextBlock Grid.Column="1" Text="Цена в будний день" FontWeight="Bold" Foreground="LightGray" FontSize="16"/>
+                                                <TextBlock Grid.Column="2" Text="Цена в выходной день" FontWeight="Bold" Foreground="LightGray" FontSize="16"/>
+                                            </Grid>
+                                        </ListView.Header>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate x:DataType="getPT:GetPackagingTypesListResponseEntry">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{x:Bind Path=Name}"/>
+                                                    <TextBlock Grid.Column="1" Text="{x:Bind Path=PricePerSquareMeter}"/>
+                                                    <TextBlock Grid.Column="2" Text="{x:Bind Path=PricePerSquareMeterOnWeekend}"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
 
-                            <controls:FloatingTextBox Placeholder="Цена в будний день"
-                                                      Text="{Binding PackagingTypesVM.PricePerSquareMeter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DecimalToStringConverter}}"
-                                                      Margin="0,0,0,30"
-                                                      IsNumeric="True"/>
 
-                            <controls:FloatingTextBox Placeholder="Цена в выходной день"
-                                                      Text="{Binding PackagingTypesVM.PricePerSquareMeterOnWeeken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DecimalToStringConverter}}"
-                                                      Margin="0,0,0,20"
-                                                      IsNumeric="True"/>
 
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Right"
-                                        Spacing="8">
-                                <Button Content="Сохранить"
-                                        Command="{Binding PackagingTypesVM.SavePackagingTypeCommand}"/>
-                                <Button Content="Отмена" 
-                                        Command="{Binding PackagingTypesVM.SplitViewPaneCloseCommand}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </SplitView.Pane>
-                </SplitView>
-            </Border>
+                                </Grid>
+                            </SplitView.Content>
 
-        </StackPanel>
+                            <!-- Выдвижная форма -->
+                            <SplitView.Pane>
+                                <StackPanel Padding="16" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                                    <controls:FloatingTextBox Placeholder="Название тары" 
+                                                              Text="{Binding PackagingTypesVM.PackagingTypeName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                              Margin="0,10,0,30"/>
 
+                                    <controls:FloatingTextBox Placeholder="Цена в будний день"
+                                                              Text="{Binding PackagingTypesVM.PricePerSquareMeter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DecimalToStringConverter}}"
+                                                              Margin="0,0,0,30"
+                                                              IsNumeric="True"/>
+
+                                    <controls:FloatingTextBox Placeholder="Цена в выходной день"
+                                                              Text="{Binding PackagingTypesVM.PricePerSquareMeterOnWeeken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DecimalToStringConverter}}"
+                                                              Margin="0,0,0,20"
+                                                              IsNumeric="True"/>
+
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Right"
+                                                Spacing="8">
+                                        <Button Content="Сохранить"
+                                                Command="{Binding PackagingTypesVM.SavePackagingTypeCommand}"/>
+                                        <Button Content="Отмена" 
+                                                Command="{Binding PackagingTypesVM.SplitViewPaneCloseCommand}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </SplitView.Pane>
+                        </SplitView>
+                    </Border>
+
+                </StackPanel>
+
+            </Grid>
+        </ScrollView>
     </Grid>
 </Page>
