@@ -36,9 +36,9 @@ public partial class PackagingTypesViewModel
         set
         {
             SetProperty(ref selectedPackagingType, value);
+            OnPropertyChanged(nameof(CanDeleteOrEditPackagingType));
             DeletePackagingTypeCommand.NotifyCanExecuteChanged();
             EditPackagingTypeCommand.NotifyCanExecuteChanged();
-            OnPropertyChanged(nameof(CanDeleteOrEditPackagingType));
         }
     }
 

@@ -11,17 +11,17 @@ public abstract class DbRepository<TDbContext, TEntityKey, TEntity> : IDbReposit
     where TEntity : class, IEntry<TEntityKey>
     where TEntityKey : IEquatable<TEntityKey>, new()
 {
-    protected TDbContext DbContext { get; }
-    protected DbSet<TEntity> DbSet { get; }
+    public TDbContext DbContext { get; }
+    public DbSet<TEntity> DbSet { get; }
     public event EventHandler RepositoryChanged;
 
-    protected DbRepository(TDbContext dbContext)
+    public DbRepository(TDbContext dbContext)
     {
         DbContext = dbContext;
         DbSet = DbContext.Set<TEntity>();
     }
 
-    protected virtual void OnRepositoryChanged()
+    public virtual void OnRepositoryChanged()
     {
         RepositoryChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -161,7 +161,7 @@ public abstract class DbRepository<TDbContext, TEntityKey, TEntity> : IDbReposit
         return false;
     }
 
-    protected virtual TransactionScope CreateTransactionScope(IsolationLevel isolationLevel)
+    public virtual TransactionScope CreateTransactionScope(IsolationLevel isolationLevel)
     {
         var transactionOptions = new TransactionOptions
         {

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace DDDLesson.Domain.WorkDays.CreateWorkDays;
 
-public class CreateWorkDaysCommand : IRequest<IReadOnlyCollection<WorkDayId>>
-{
-    //public required IReadOnlyCollection<>
-}
+//public class CreateWorkDaysCommand : IRequest<IReadOnlyCollection<WorkDayId>>
+//{
+//    //public required IReadOnlyCollection<>
+//}

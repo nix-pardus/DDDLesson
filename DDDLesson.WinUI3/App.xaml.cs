@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -22,20 +23,8 @@ namespace DDDLesson.WinUI3
         /// </summary>
         public App()
         {
-            this.UnhandledException += (sender, e) =>
-            {
-                Debug.WriteLine($"UNHANDLED EXCEPTION: {e.Exception}");
-            };
-            TaskScheduler.UnobservedTaskException += (sender, e) =>
-            {
-                Debug.WriteLine($"TASK EXCEPTOPN: {e.Exception}");
-            };
-
             this.InitializeComponent();
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.AddAplicationServices();
-
-            ServiceProvider = serviceCollection.BuildServiceProvider();
+            
         }
 
         /// <summary>
@@ -44,6 +33,10 @@ namespace DDDLesson.WinUI3
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddAplicationServices();
+
+            ServiceProvider = serviceCollection.BuildServiceProvider();
 
 
             m_window = new MainWindow();

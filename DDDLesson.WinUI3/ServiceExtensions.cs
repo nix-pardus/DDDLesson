@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DDDLesson.Domain;
+﻿using DDDLesson.Domain.PackagingTypes.GetPackagingTypesList;
 using DDDLesson.Infrastructure;
 using DDDLesson.WinUI3.Interfaces.Navigation;
 using DDDLesson.WinUI3.Pages;
@@ -19,15 +18,18 @@ public static class ServiceExtensions
     {
         services.AddInfrastructureServices();
 
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DomainAssemblyMarker).Assembly));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetPackagingTypesListQueryHandler).Assembly));
 
-        var mapperConfig = new MapperConfiguration(mc =>
-        {
-            mc.AddProfile<WorkersMappingProfile>();
-            mc.AddProfile<PackagingTypesMappingProfile>();
-        });
-        IMapper mapper = mapperConfig.CreateMapper();
-        services.AddSingleton(mapper);
+        //var mapperConfig = new MapperConfiguration(mc =>
+        //{
+        //    mc.AddProfile<WorkersMappingProfile>();
+        //    mc.AddProfile<PackagingTypesMappingProfile>();
+        //});
+        //IMapper mapper = mapperConfig.CreateMapper();
+        //services.AddSingleton(mapper);
+        services.AddAutoMapper(
+            typeof(WorkersMappingProfile),
+            typeof(PackagingTypesMappingProfile));
 
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<CreateWorkerViewModel>();

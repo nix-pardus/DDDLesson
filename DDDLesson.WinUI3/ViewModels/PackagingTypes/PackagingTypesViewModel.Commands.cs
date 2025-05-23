@@ -48,7 +48,7 @@ public partial class PackagingTypesViewModel
     }
 
     [RelayCommand(CanExecute = nameof(CanDeleteOrEditPackagingType))]
-    public async Task EditPackagingTypeAsync(CancellationToken cancellationToken)
+    public void EditPackagingType()
     {
         isEditMode = true;
         IsPaneOpen = true;

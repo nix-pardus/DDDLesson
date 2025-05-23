@@ -20,5 +20,10 @@ namespace DDDLesson.WinUI3.Pages
             //    ?? throw new InvalidOperationException("ServiceProvider not initialized.");
             DataContext = vm;
         }
+
+        private void deleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            deleteFlyout.Hide();
+        }
     }
 }
