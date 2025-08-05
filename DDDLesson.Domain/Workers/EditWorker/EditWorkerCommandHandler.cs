@@ -18,6 +18,7 @@ public class EditWorkerCommandHandler : IRequestHandler<EditWorkerCommand, Worke
         var isUpdated = await repository.UpdateAsync(request.Id, workerEntity =>
         {
             workerEntity.Name = request.WorkerName;
+            workerEntity.IsInOurShift = request.IsInOurShift;
         });
 
         if (isUpdated)

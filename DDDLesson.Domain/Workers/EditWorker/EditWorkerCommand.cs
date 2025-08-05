@@ -7,4 +7,5 @@ public class EditWorkerCommand : IRequest<WorkerId>
 {
     public required WorkerId Id { get; init; }
     public string WorkerName { get; init; }
+    public bool IsInOurShift { get; init; }
 }
