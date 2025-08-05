@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace DDDLesson.WinUI3.ViewModels.PackagingTypes;
@@ -18,7 +19,11 @@ public partial class PackagingTypesViewModel
         get => isPaneOpen;
         set
         {
-            SetProperty(ref isPaneOpen, value);
+            try
+            {
+                SetProperty(ref isPaneOpen, value);
+            }
+            catch { }
         }
     }
     public ObservableCollection<GetPackagingTypesListResponseEntry> PackagingTypesList

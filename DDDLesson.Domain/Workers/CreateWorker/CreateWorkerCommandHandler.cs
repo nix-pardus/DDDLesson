@@ -19,7 +19,8 @@ public class CreateWorkerCommandHandler : IRequestHandler<CreateWorkerCommand, W
         var worker = await repository.AddAsync(new WorkerEntity
         {
             Id = WorkerId.New(),
-            Name = request.Name
+            Name = request.Name,
+            IsInOurShift = request.IsInOurShift
         });
         return worker.Entity.Id;
     }

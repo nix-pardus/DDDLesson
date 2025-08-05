@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace DDDLesson.WinUI3.ViewModels.Workers.GetWorkersList;
+namespace DDDLesson.WinUI3.ViewModels.Workers.Responses;
 
 public class GetWorkersListResponse
 {

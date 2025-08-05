@@ -9,4 +9,5 @@ public sealed class WorkerEntity : IEntry<WorkerId>
     public required WorkerId Id {  get; set; }
     [Required, MaxLength(128)]
     public required string Name { get; set; }
+    public required bool IsInOurShift { get; set; }
 }

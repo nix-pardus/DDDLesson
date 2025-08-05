@@ -6,11 +6,92 @@
     xmlns:local="using:DDDLesson.WinUI3.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mainVM="using:DDDLesson.WinUI3.ViewModels.MainPageVM"
+    xmlns:controls="using:ControlsCollection"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="MainPage"/>
-        <Button Content="Тары и цены" Command="{Binding NavigateToPackagingTypesVMCommand}"/>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,32" Padding="32" Orientation="Horizontal" Spacing="16">
+            <StackPanel.Background>
+                <LinearGradientBrush StartPoint="0,2" EndPoint="0,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="Teal" Offset="1.5"/>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+
+            <TextBlock x:Name="selectedDateTextBlock" Text="Июль 2025" FontSize="24" Foreground="Gainsboro" Width="300" VerticalAlignment="Center"/>
+
+            <Border BorderThickness="1" BorderBrush="Black" Padding="32,8" CornerRadius="8">
+                <controls:MonthYearGroupedSelector 
+                    Dates="{Binding MainPageVM.Dates, Mode=OneWay}" 
+                    MonthSelected="MonthYearGroupedSelector_MonthSelected"
+                    Height="150"/>
+            </Border>
+
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <GridView x:Name="collection" IsItemClickEnabled="True" ItemClick="TipsGrid_ItemClick" HorizontalAlignment="Center" MaxWidth="1498">
+                <GridView.ItemContainerStyle>
+                    <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
+                        <Style.Setters>
+                            <Setter Property="Margin" Value="12" />
+                        </Style.Setters>
+                    </Style>
+                </GridView.ItemContainerStyle>
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="connectedElement" Height="190" Width="190" AutomationProperties.Name="{Binding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Teal" Height="60">
+                                <TextBlock Text="Item" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" />
+                            </Grid>
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="{Binding}" Margin="12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="1" Width="50"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <Grid x:Name="SmokeGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed" >
+                <Grid.Background>
+                    <SolidColorBrush Color="{ThemeResource SystemChromeAltHighColor}" Opacity="0.8" />
+                </Grid.Background>
+                <Grid x:Name="destinationElement" HorizontalAlignment="Center" VerticalAlignment="Center" Width="900" Height="600" BorderThickness="1" BorderBrush="Teal">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Teal" Height="80">
+                        <TextBlock Text="Header" Style="{ThemeResource HeaderTextBlockStyle}" Margin="12" VerticalAlignment="Center" />
+                        <Button Click="BackButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Height="40" Width="40" Margin="5"
+                    ToolTipService.ToolTip="Close" AutomationProperties.Name="Close">
+                            <Button.Content>
+                                <SymbolIcon Symbol="Clear" />
+                            </Button.Content>
+                        </Button>
+                    </Grid>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" Grid.Row="1">
+                        <TextBlock Text="Content" Style="{ThemeResource BaseTextBlockStyle}" Margin="12" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

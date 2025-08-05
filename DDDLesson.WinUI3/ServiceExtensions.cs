@@ -3,11 +3,9 @@ using DDDLesson.Infrastructure;
 using DDDLesson.WinUI3.Interfaces.Navigation;
 using DDDLesson.WinUI3.Pages;
 using DDDLesson.WinUI3.ViewModels;
+using DDDLesson.WinUI3.ViewModels.MainPageVM;
 using DDDLesson.WinUI3.ViewModels.PackagingTypes;
 using DDDLesson.WinUI3.ViewModels.Workers;
-using DDDLesson.WinUI3.ViewModels.Workers.CreateWorker;
-using DDDLesson.WinUI3.ViewModels.Workers.DeleteWorker;
-using DDDLesson.WinUI3.ViewModels.Workers.GetWorkersList;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DDDLesson.WinUI3;
@@ -19,26 +17,18 @@ public static class ServiceExtensions
         services.AddInfrastructureServices();
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetPackagingTypesListQueryHandler).Assembly));
-
-        //var mapperConfig = new MapperConfiguration(mc =>
-        //{
-        //    mc.AddProfile<WorkersMappingProfile>();
-        //    mc.AddProfile<PackagingTypesMappingProfile>();
-        //});
-        //IMapper mapper = mapperConfig.CreateMapper();
-        //services.AddSingleton(mapper);
+        
         services.AddAutoMapper(
-            typeof(WorkersMappingProfile),
             typeof(PackagingTypesMappingProfile));
 
         services.AddSingleton<MainViewModel>();
-        services.AddSingleton<CreateWorkerViewModel>();
-        services.AddSingleton<GetWorkerListViewModel>();
-        services.AddSingleton<DeleteWorkerViewModel>();
-        services.AddSingleton<PackagingTypesViewModel>();
+        services.AddTransient<PackagingTypesViewModel>();
+        services.AddTransient<WorkersViewModel>();
+        services.AddTransient<MainPageViewModel>();
 
         services.AddTransient<MainPage>();
         services.AddTransient<PackagingTypesPage>();
+        services.AddTransient<WorkersPage>();
 
         services.AddSingleton<INavigationService, NavigationService>();
         return services;

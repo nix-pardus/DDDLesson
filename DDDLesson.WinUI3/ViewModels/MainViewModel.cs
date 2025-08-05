@@ -2,10 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using DDDLesson.WinUI3.Interfaces.Navigation;
 using DDDLesson.WinUI3.Pages;
+using DDDLesson.WinUI3.ViewModels.MainPageVM;
 using DDDLesson.WinUI3.ViewModels.PackagingTypes;
-using DDDLesson.WinUI3.ViewModels.Workers.CreateWorker;
-using DDDLesson.WinUI3.ViewModels.Workers.DeleteWorker;
-using DDDLesson.WinUI3.ViewModels.Workers.GetWorkersList;
+using DDDLesson.WinUI3.ViewModels.Workers;
 using Microsoft.UI.Xaml.Controls;
 using System.Collections.Generic;
 
@@ -15,31 +14,48 @@ public partial class MainViewModel : ObservableValidator
 {
     private readonly INavigationService _navigationService;
     private readonly Stack<Page> _navigationStack = new();
-    public CreateWorkerViewModel CreateWorker { get; }
-    public GetWorkerListViewModel GetWorkerList { get; }
-    public DeleteWorkerViewModel DeleteWorker { get; }
     public PackagingTypesViewModel PackagingTypesVM { get; }
-
+    public WorkersViewModel WorkersVM { get; }
+    public MainPageViewModel MainPageVM { get; }
 
     public MainViewModel
     (
-        CreateWorkerViewModel createWorker,
-        GetWorkerListViewModel getWorkerList,
-        DeleteWorkerViewModel deleteWorker,
         PackagingTypesViewModel packagingTypesVM,
-        INavigationService navigationService)
+        INavigationService navigationService,
+        WorkersViewModel workersVM,
+        MainPageViewModel mainPageVM)
     {
-        CreateWorker = createWorker;
-        GetWorkerList = getWorkerList;
-        DeleteWorker = deleteWorker;
         PackagingTypesVM = packagingTypesVM;
         _navigationService = navigationService;
+        WorkersVM = workersVM;
+        MainPageVM = mainPageVM;
     }
+
+    [RelayCommand]
+    public void NavigateToMain() => _navigationService.NavigateTo<MainPage>();
 
     [RelayCommand]
     public void NavigateToPackagingTypesVM()
     {
-        _navigationService.NavigateTo<PackagingTypesPage>();
+        _navigationService.NavigateTo<PackagingTypesPage>(page =>
+        {
+            if(page.DataContext is MainViewModel mainVm)
+            {
+                mainVm.PackagingTypesVM.GetPackagingTypesCommand.Execute(mainVm);
+            }
+        });
+    }
+    
+    [RelayCommand]
+    public void NavigateToWorkersVM()
+    {
+        _navigationService.NavigateTo<WorkersPage>(page =>
+        {
+            if(page.DataContext is MainViewModel mainVm)
+            {
+                mainVm.WorkersVM.GetWorkersCommand.Execute(mainVm);
+            }
+        });
     }
 
     [RelayCommand(CanExecute = nameof(CanGoBack))]

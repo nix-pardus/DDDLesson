@@ -86,7 +86,7 @@
                                    CompactPaneLength="0"
                                    OpenPaneLength="400"
                                    PanePlacement="Left"
-                                   IsPaneOpen="{Binding PackagingTypesVM.IsPaneOpen}">
+                                   IsPaneOpen="{x:Bind vm.PackagingTypesVM.IsPaneOpen, Mode=OneWay}">
 
                             <!-- Основной контент страницы -->
                             <SplitView.Content>
@@ -97,6 +97,11 @@
                                               SelectedItem="{Binding PackagingTypesVM.SelectedPackagingType, Mode=TwoWay}"
                                               Grid.Column="0"
                                               Margin="12">
+                                        <ListView.ItemContainerTransitions>
+                                            <TransitionCollection>
+                                                <AddDeleteThemeTransition/>
+                                            </TransitionCollection>
+                                        </ListView.ItemContainerTransitions>
                                         <ListView.Header>
                                             <Grid Background="DarkSlateGray"
                                                   Padding="10">

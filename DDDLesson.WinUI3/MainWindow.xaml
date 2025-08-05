@@ -6,19 +6,29 @@
     xmlns:local="using:DDDLesson.WinUI3"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:getWorkers="using:DDDLesson.WinUI3.ViewModels.Workers.GetWorkersList"
     mc:Ignorable="d"
     Title="Квадратура">
-    
-    <Grid>
-        <Frame x:Name="MainFrame" IsNavigationStackEnabled="True"/>
-        <StackPanel x:Name="MainStackPanel" 
-                    Orientation="Vertical" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Visibility="Collapsed">
 
-            <Button Content="Тары и цены" Command="{x:Bind MainViewModel.NavigateToPackagingTypesVMCommand}"/>
-        </StackPanel>
+    <Grid>
+        <NavigationView x:Name="NavView"
+                        PaneDisplayMode="Auto"
+                        IsBackButtonVisible="Visible"
+                        IsBackEnabled="{Binding MainViewModel.CanGoBack}"
+                        BackRequested="NavView_BackRequested"
+                        ItemInvoked="NavView_ItemInvoked"
+                        Loaded="NavView_Loaded">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Главная"
+                                    Icon="Home"
+                                    Tag="NavigateToMainCommand"/>
+                <NavigationViewItem Content="Тары и цены" 
+                                    Icon="Shop"
+                                    Tag="NavigateToPackagingTypesVMCommand"/>
+                <NavigationViewItem Content="Упаковщики"
+                                    Icon="People"
+                                    Tag="NavigateToWorkersVMCommand"/>
+            </NavigationView.MenuItems>
+            <Frame x:Name="MainFrame" IsNavigationStackEnabled="True"/>
+        </NavigationView>
     </Grid>
 </Window>

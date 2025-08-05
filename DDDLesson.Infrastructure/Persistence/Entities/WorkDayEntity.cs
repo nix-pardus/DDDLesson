@@ -8,9 +8,9 @@ public sealed class WorkDayEntity : IEntry<WorkDayId>
     [Key]
     public required WorkDayId Id { get; set; }
     [Required]
-    public required DateTime Date { get; init; }
+    public required DateTime Date { get; set; }
 
-    public IReadOnlyCollection<WorkUnitEntity>? WorkUnits { get; init; }
+    public IReadOnlyCollection<WorkUnitEntity>? WorkUnits { get; set; }
 
-    public required bool IsWeekend { get; init; }
+    public required bool IsWeekend { get; set; }
 }

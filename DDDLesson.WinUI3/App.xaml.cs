@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -16,6 +13,7 @@ namespace DDDLesson.WinUI3
     public partial class App : Application
     {
         public static IServiceProvider? ServiceProvider { get; private set; }
+        private Window? m_window;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -23,8 +21,9 @@ namespace DDDLesson.WinUI3
         /// </summary>
         public App()
         {
+            this.RequestedTheme = ApplicationTheme.Dark;
+
             this.InitializeComponent();
-            
         }
 
         /// <summary>
@@ -43,6 +42,6 @@ namespace DDDLesson.WinUI3
             m_window.Activate();
         }
 
-        private Window? m_window;
+        
     }
 }
