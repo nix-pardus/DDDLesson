@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using DDDLesson.Domain.PackagingTypes.CreatePackagingType;
 using DDDLesson.Domain.PackagingTypes.DeletePackagingType;
-using DDDLesson.Domain.PackagingTypes.GetPackagingTypesList;
-using System.Threading.Tasks;
-using System.Threading;
 using DDDLesson.Domain.PackagingTypes.EditPackagingType;
+using DDDLesson.Domain.PackagingTypes.GetPackagingTypesList;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace DDDLesson.WinUI3.ViewModels.PackagingTypes;
 

@@ -5,3 +5,11 @@ dotnet ef database update --verbose --project DDDLesson.Infrastructure --startup
 
 dotnet ef migrations add InitialCreate --project DDDLesson.Infrastructure
 dotnet ef database update --project DDDLesson.Infrastructure
+
+dotnet ef migrations add AddIsInOurShift --project DDDLesson.Infrastructure --startup-project DDDLesson.WinUI3 --context AppDbContext
+dotnet ef migrations add AddIsInOurShift --project DDDLesson.Infrastructure --startup-project DDDLesson.Presentation
+
+dotnet ef migrations add AddIsInOurShift -p DDDLesson.Infrastructure  -s DDDLesson.WinUI3  -c AppDbContext
+
+dotnet ef migrations add AddIsInOurShift --project DDDLesson.Infrastructure --startup-project DDDLesson.WinUI3 --context AppDbContext --verbose
+dotnet ef database update --verbose --project DDDLesson.Infrastructure --startup-project DDDLesson.WinUI3

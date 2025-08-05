@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DDDLesson.Domain.Workers.GetWorkersList;
-using DDDLesson.WinUI3.ViewModels.Workers.GetWorkersList;
+using DDDLesson.WinUI3.ViewModels.Workers.Responses;
 
-namespace DDDLesson.WinUI3.ViewModels.Workers;
+namespace DDDLesson.WinUI3.ViewModels.Workers.Mappings;
 
 public class WorkersMappingProfile : Profile
 {

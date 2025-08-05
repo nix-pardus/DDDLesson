@@ -12,12 +12,11 @@ namespace DDDLesson.WinUI3.Pages
     /// </summary>
     public sealed partial class PackagingTypesPage : Page
     {
+        public MainViewModel vm { get; }
         public PackagingTypesPage(MainViewModel vm)
         {
             this.InitializeComponent();
-
-            //DataContext = App.ServiceProvider?.GetRequiredService<MainViewModel>()
-            //    ?? throw new InvalidOperationException("ServiceProvider not initialized.");
+            this.vm = vm;
             DataContext = vm;
         }
 

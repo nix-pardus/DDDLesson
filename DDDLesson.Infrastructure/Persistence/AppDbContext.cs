@@ -7,7 +7,7 @@ namespace DDDLesson.Infrastructure.Persistence;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
 
@@ -69,11 +69,6 @@ public class AppDbContext : DbContext
         {
             b.HasKey(w => w.Id);
             b.Property(w => w.Id).HasConversion<WorkDayIdConverter>();
-
-            //b.HasMany(w => w.WorkUnits)
-            //    .WithOne()
-            //    .HasForeignKey(wu => wu.WorkDayId)
-            //    .OnDelete(DeleteBehavior.Cascade);
         });
 
         modelBuilder.Entity<WorkUnitEntity>(b =>
@@ -87,17 +82,6 @@ public class AppDbContext : DbContext
             b.Property(w => w.WorkDayId).HasConversion<WorkDayIdConverter>();
 
             b.HasOne(w => w.WorkDay).WithMany(d => d.WorkUnits).HasForeignKey(w => w.WorkDayId).OnDelete(DeleteBehavior.Cascade);
-
-
-            //b.HasOne(w => w.Worker)
-            //    .WithMany()
-            //    .HasForeignKey(w => w.WorkerId);
-            //b.HasOne(w => w.PackagingType)
-            //    .WithMany()
-            //    .HasForeignKey(w => w.PackagingTypeId);
-            //b.HasOne(w => w.WorkDay)
-            //    .WithMany()
-            //    .HasForeignKey(w => w.WorkDayId);
         });
     }
 }

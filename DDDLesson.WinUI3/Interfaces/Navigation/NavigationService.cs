@@ -26,13 +26,14 @@ public class NavigationService : INavigationService
         UpdateCanGoBack();
     }
 
-    public void NavigateTo<T>() where T : Page
+    public void NavigateTo<T>(Action<T> initializeAction = null) where T : Page
     {
         if (_frame == null)
         {
             throw new InvalidOperationException("Frame не инизиализирован.");
         }
         var page = App.ServiceProvider.GetRequiredService<T>();
+        initializeAction?.Invoke(page);
         _frame.Content = page;
         _mainViewModel = App.ServiceProvider.GetRequiredService<MainViewModel>();
         _mainViewModel.AddToNavigationStack(page);

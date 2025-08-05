@@ -15,8 +15,4 @@
 		<ProjectReference Include="..\DDDLesson.Infrastructure\DDDLesson.Infrastructure.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="WorkUnits\CreateWorkUnit\" />
-	</ItemGroup>
-
 </Project>

@@ -19,14 +19,7 @@ public partial class PackagingTypesViewModel : ObservableValidator
         this.mapper = mapper;
         this.repository = repository;
         this.navigationService = navigationService;
-
-        InitializeCommands();
         SubscribeToEvents();
-    }
-
-    private void InitializeCommands()
-    {
-        GetPackagingTypesCommand.Execute(this);
     }
 
     private void SubscribeToEvents()
