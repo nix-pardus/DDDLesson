@@ -50,6 +50,7 @@ public partial class WorkersViewModel
         isEditMode = true;
         IsPaneOpen = true;
         WorkerName = SelectedWorker.Name;
+        IsInOurShift = SelectedWorker.IsInOurShift;
     }
 
     [RelayCommand(CanExecute = nameof(CanDeleteOrEditWorker))]

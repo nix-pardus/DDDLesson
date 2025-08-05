@@ -19,7 +19,8 @@ public class GetWorkersListQueryHandler : IRequestHandler<GetWorkersListQuery, G
             .Select(entity => new GetWorkersListQueryResultEntry
             {
                 Id = entity.Id,
-                Name = entity.Name
+                Name = entity.Name,
+                IsInOurShift = entity.IsInOurShift
             })
             .ToArray();
         return new GetWorkersListQueryResult

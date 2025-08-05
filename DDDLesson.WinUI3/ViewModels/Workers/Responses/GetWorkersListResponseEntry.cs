@@ -6,4 +6,5 @@ public class GetWorkersListResponseEntry
 {
     public required WorkerId Id { get; init; }
     public string Name { get; init; }
+    public bool IsInOurShift { get; init; }
 }

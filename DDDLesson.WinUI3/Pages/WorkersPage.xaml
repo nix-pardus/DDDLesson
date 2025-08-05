@@ -7,9 +7,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:ControlsCollection"
+    xmlns:converters="using:DDDLesson.WinUI3.Converters"
     xmlns:getWorkers="using:DDDLesson.WinUI3.ViewModels.Workers.Responses"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <converters:BoolToStringConverter x:Key="BoolToStringConverter"/>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -63,7 +68,7 @@
                                                 Command="{Binding WorkersVM.DeleteWorkerCommand}"
                                                 Background="{ThemeResource CloseButtonBackgroundPointerOver}"
                                                 Click="deleteButton_Click">
-                                            
+
                                         </Button>
                                     </StackPanel>
                                 </Flyout>
@@ -102,10 +107,16 @@
                                               Padding="10">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
                                             <TextBlock Grid.Column="0"
                                                        Text="Имя"
+                                                       FontWeight="Bold"
+                                                       Foreground="LightGray"
+                                                       FontSize="16"/>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="В нашей смене"
                                                        FontWeight="Bold"
                                                        Foreground="LightGray"
                                                        FontSize="16"/>
@@ -116,10 +127,13 @@
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
                                                 </Grid.ColumnDefinitions>
 
                                                 <TextBlock Grid.Column="0"
                                                            Text="{x:Bind Path=Name}"/>
+                                                <TextBlock Grid.Column="1"
+                                                           Text="{x:Bind Path=IsInOurShift, Converter={StaticResource BoolToStringConverter}}"/>
                                             </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -133,6 +147,13 @@
                                 <controls:FloatingTextBox Placeholder="Имя упаковщика"
                                                           Text="{Binding WorkersVM.WorkerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                           Margin="0,10,0,30"/>
+                                <StackPanel Orientation="Horizontal"
+                                            Spacing="16">
+                                    <TextBlock Text="В нашей смене"
+                                               VerticalAlignment="Center"/>
+                                    <CheckBox IsChecked="{Binding WorkersVM.IsInOurShift, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              VerticalAlignment="Center"/>
+                                </StackPanel>
 
                                 <StackPanel Orientation="Horizontal"
                                             HorizontalAlignment="Right"

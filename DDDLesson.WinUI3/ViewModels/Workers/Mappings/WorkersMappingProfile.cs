@@ -10,7 +10,8 @@ public class WorkersMappingProfile : Profile
     {
         CreateMap<GetWorkersListQueryResultEntry, GetWorkersListResponseEntry>()
             .ForMember(q => q.Id, q => q.MapFrom(w => w.Id))
-            .ForMember(q => q.Name, q => q.MapFrom(w => w.Name));
+            .ForMember(q => q.Name, q => q.MapFrom(w => w.Name))
+            .ForMember(q => q.IsInOurShift, q => q.MapFrom(w => w.IsInOurShift));
 
         CreateMap<GetWorkersListQueryResult, GetWorkersListResponse>()
             .ForMember(q => q.Entries, q => q.MapFrom(w => w.Entries));
