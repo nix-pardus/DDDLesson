@@ -8,8 +8,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:mainVM="using:DDDLesson.WinUI3.ViewModels.MainPageVM"
     xmlns:controls="using:ControlsCollection"
+    xmlns:converters="using:DDDLesson.WinUI3.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <converters:DateTimeToMonthTextConverter x:Key="DateTimeToMonthTextConverter"/>
+    </Page.Resources>
 
     <Grid>
 
@@ -26,19 +31,22 @@
                 </LinearGradientBrush>
             </StackPanel.Background>
 
-            <TextBlock x:Name="selectedDateTextBlock" Text="Июль 2025" FontSize="24" Foreground="Gainsboro" Width="300" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding MainPageVM.SelectedMonth, Converter={StaticResource DateTimeToMonthTextConverter}}" FontSize="24" Foreground="Gainsboro" Width="300" VerticalAlignment="Center"/>
 
-            <Border BorderThickness="1" BorderBrush="Black" Padding="32,8" CornerRadius="8">
+            <Border BorderThickness="1" BorderBrush="DimGray" Padding="8" CornerRadius="8">
                 <controls:MonthYearGroupedSelector 
-                    Dates="{Binding MainPageVM.Dates, Mode=OneWay}" 
-                    MonthSelected="MonthYearGroupedSelector_MonthSelected"
-                    Height="150"/>
+                    Dates="{Binding MainPageVM.Dates, Mode=TwoWay}" 
+                    SelectedMonth="{Binding MainPageVM.SelectedMonth, Mode=TwoWay}"
+                    Height="180"
+                    Width="250"/>
             </Border>
 
         </StackPanel>
+        
+        <!--начало пользовательского элемента управления-->
 
         <Grid Grid.Row="1">
-            <GridView x:Name="collection" IsItemClickEnabled="True" ItemClick="TipsGrid_ItemClick" HorizontalAlignment="Center" MaxWidth="1498">
+            <GridView x:Name="collection" IsItemClickEnabled="True" ItemClick="TipsGrid_ItemClick" HorizontalAlignment="Center" MaxWidth="1498" ItemsSource="{Binding MainPageVM.WorkDaysOfMonth}">
                 <GridView.ItemContainerStyle>
                     <Style BasedOn="{StaticResource GridViewItemRevealStyle}" TargetType="GridViewItem">
                         <Style.Setters>
@@ -54,7 +62,7 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Teal" Height="60">
-                                <TextBlock Text="Item" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" />
+                                <TextBlock Text="{Binding Date}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{ThemeResource TitleTextBlockStyle}" />
                             </Grid>
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{ThemeResource SystemControlBackgroundChromeMediumLowBrush}" Grid.Row="1">
                                 <Grid.RowDefinitions>
@@ -92,6 +100,9 @@
                     </Grid>
                 </Grid>
             </Grid>
+
+            <!--конец пользовательского элемента управления-->
+
         </Grid>
     </Grid>
 </Page>

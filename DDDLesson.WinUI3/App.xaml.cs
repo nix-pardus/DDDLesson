@@ -24,6 +24,7 @@ namespace DDDLesson.WinUI3
             this.RequestedTheme = ApplicationTheme.Dark;
 
             this.InitializeComponent();
+
         }
 
         /// <summary>

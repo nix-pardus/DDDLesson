@@ -13,6 +13,50 @@ namespace ControlsCollection;
 
 public sealed partial class MonthYearGroupedSelector : UserControl
 {
+    public DateTime? SelectedMonth
+    {
+        get => (DateTime?)GetValue(SelectedMonthProperty);
+        set
+        {
+            SetValue(SelectedMonthProperty, value);
+        }
+    }
+
+    public static readonly DependencyProperty SelectedMonthProperty =
+        DependencyProperty.Register(
+            nameof(SelectedMonth),
+            typeof(DateTime?),
+            typeof(MonthYearGroupedSelector),
+            new PropertyMetadata(null, OnSelectedMonthChanged));
+
+    private static void OnSelectedMonthChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var control = d as MonthYearGroupedSelector;
+        control?.UpdateSelection();
+    }
+
+    private void UpdateSelection()
+    {
+        if (SelectedMonth == null)
+        {
+            listView.SelectedItem = null;
+            return;
+        }
+
+        foreach(YearGroup group in MonthsCVS.Source as ObservableCollection<YearGroup> ?? new())
+        {
+            foreach(MonthItem item in group.OfType<MonthItem>())
+            {
+                if(item.Year == SelectedMonth.Value.Year && item.Month == SelectedMonth.Value.Month)
+                {
+                    listView.SelectedItem = item;
+                    return;
+                }
+            }
+        }
+        listView.SelectedItem = null;
+    }
+
     // Классы данных
     public class MonthItem
     {
@@ -79,21 +123,19 @@ public sealed partial class MonthYearGroupedSelector : UserControl
             });
 
         MonthsCVS.Source = new ObservableCollection<YearGroup>(grouped);
+        UpdateSelection();
     }
 
     private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.AddedItems.Count > 0 && e.AddedItems[0] is MonthItem selectedMonth)
         {
+            SetValue(SelectedMonthProperty, selectedMonth.Date);
             MonthSelected?.Invoke(this, selectedMonth.Date);
         }
-    }
-
-    private void ListView_ItemClick(object sender, ItemClickEventArgs e)
-    {
-        if (e.ClickedItem is MonthItem clickedMonth)
+        else if(e.RemovedItems.Count > 0)
         {
-            MonthSelected?.Invoke(this, clickedMonth.Date);
+            SetValue(SelectedMonthProperty, null);
         }
     }
 }
