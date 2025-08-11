@@ -16,7 +16,7 @@
               SelectionChanged="ListView_SelectionChanged"
               SelectionMode="Single"
               IsItemClickEnabled="True"
-              ItemClick="ListView_ItemClick">
+              x:Name="listView">
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
                 <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>

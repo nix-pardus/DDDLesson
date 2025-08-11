@@ -32,7 +32,7 @@ namespace DDDLesson.WinUI3.Pages
                 items.Add(i);
             }
 
-            collection.ItemsSource = items;
+            //collection.ItemsSource = items;
 
         }
 
@@ -84,12 +84,6 @@ namespace DDDLesson.WinUI3.Pages
             SmokeGrid.Visibility = Visibility.Visible;
 
             animation.TryStart(destinationElement);
-        }
-
-        private void MonthYearGroupedSelector_MonthSelected(object sender, DateTime e)
-        {
-            string date = e.ToString("Y", CultureInfo.CurrentCulture);
-            selectedDateTextBlock.Text = char.ToUpper(date[0]) + date.Substring(1);
         }
     }
 }

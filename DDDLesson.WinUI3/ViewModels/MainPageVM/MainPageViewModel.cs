@@ -29,16 +29,11 @@ public partial class MainPageViewModel : ObservableValidator
         _packagingTypeEntityRepository = packagingTypeEntityRepository;
         _navigationService = navigationService;
         SubscribeToEvents();
+        GetAllMonthsCommand.Execute(this);
     }
 
     private void SubscribeToEvents()
     {
         this._workDayEntityRepository.RepositoryChanged += async (s, e) => await GetWorkDaysOfMonthAsync();
-
-        //this._navigationService.CanGoBackChanged += (s, e) =>
-        //{
-        //    OnPropertyChanged(nameof(CanGoBack));
-        //    GoBackCommand.NotifyCanExecuteChanged();
-        //};
     }
 }

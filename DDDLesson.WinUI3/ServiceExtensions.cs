@@ -4,6 +4,7 @@ using DDDLesson.WinUI3.Interfaces.Navigation;
 using DDDLesson.WinUI3.Pages;
 using DDDLesson.WinUI3.ViewModels;
 using DDDLesson.WinUI3.ViewModels.MainPageVM;
+using DDDLesson.WinUI3.ViewModels.MainPageVM.Mappings;
 using DDDLesson.WinUI3.ViewModels.PackagingTypes;
 using DDDLesson.WinUI3.ViewModels.Workers;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,7 @@ public static class ServiceExtensions
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetPackagingTypesListQueryHandler).Assembly));
         
         services.AddAutoMapper(
-            typeof(PackagingTypesMappingProfile));
+            typeof(MainPageVMMappingProfile));
 
         services.AddSingleton<MainViewModel>();
         services.AddTransient<PackagingTypesViewModel>();
